@@ -1,17 +1,47 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from './assets/vite.svg'
-// import heroImg from './assets/hero.png'
 import './App.css'
+import { Button } from './components/ui/Button'
+import { PlusIcon } from './icons/PlusIcon'
+import { ShareIcon } from './icons/ShareIcon'
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return {
-        
+  return (
+    <>
+      <Button 
+        variant={"primary"}
+        startIcon={<PlusIcon size={"lg"} />} 
+        endIcon={<ShareIcon size={"lg"} />} 
+        size="lg" 
+        title={"Share"}
+      ></Button>
 
-  }
+<Button 
+        variant={"secondary"}
+        startIcon={<PlusIcon size={"lg"} />} 
+        endIcon={<ShareIcon size={"lg"} />} 
+        size="lg" 
+        title={"Share"}
+      ></Button>
+
+
+<Button 
+        variant={"primary"}
+        startIcon={<PlusIcon />} 
+        endIcon={<ShareIcon />} 
+        size="sm" 
+        title={"Share"}
+      ></Button>
+
+
+<Button 
+        variant={"primary"}
+        startIcon={<PlusIcon size={"md"} />} 
+        endIcon={<ShareIcon size={"md"} />} 
+        size="md" 
+        title={"Share"}
+      ></Button>
+    </>
+  ) 
 }
-
 
 export default App
