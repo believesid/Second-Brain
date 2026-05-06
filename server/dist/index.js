@@ -58,9 +58,9 @@ app.post("/api/v1/signin", (req, res) => {
 });
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
     //@ts-ignore
-    const link;
+    // const link;
     //@ts-ignore
-    const type;
+    // const type;
     await ContentModel.create({
         link,
         //@ts-ignore
@@ -118,7 +118,34 @@ app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
         });
     }
 });
-app.post("api/v1/share:link/", async (req, res) => {
+app.post("api/v1/brain/:shareLink", async (req, res) => {
+    const hash = req.params.shareLink;
+    const link = await LinkModel.findOne({
+        hash
+    });
+    if (!link) {
+        res.status(411).json({
+            message: "Sorry incorrect input"
+        });
+        return;
+    }
+    const content = await ContentModel.find({
+        userId: link.userId
+    });
+    console.log(link);
+    const user = await UserModel.findOne({
+        _id: link.userId
+    });
+    if (!user) {
+        res.status(411).json({
+            message: "user not found"
+        });
+        return;
+    }
+    res.json({
+        username: user.username,
+        content: content
+    });
 });
 app.listen(3000);
 //# sourceMappingURL=index.js.map
