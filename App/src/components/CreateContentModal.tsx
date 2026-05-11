@@ -1,4 +1,5 @@
 import { CrossIcon } from "../icons/CrossIcon";
+import { Button } from "./Button";
 
 export function CreateContentModal({open, onClose}){
       return <div>
@@ -10,9 +11,12 @@ export function CreateContentModal({open, onClose}){
                             <CrossIcon/>
                         </div>
                     </div>
-                    <div>
+                    <div className="flex-none">
                         <input type="text" placeholder="Title" />
                         <input type="text" placeholder="Link" />
+                    </div> 
+                    <div className="cursor-pointer">
+                        <Button variant= "primary" text = "submit"/>
                     </div>
                 </span>
             </div>
