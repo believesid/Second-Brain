@@ -1,11 +1,9 @@
-//@ts-ignore
-// import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { JWT_PASSWORD } from "./config.js";
 export const userMiddleware = (req, res, next) => {
     const token = req.headers["authorization"];
     //@ts-ignore
-    const decoded = jwt.verify(JWT_PASSWORD);  //header
+    const decoded = jwt.verify(header, JWT_PASSWORD);
     //@ts-ignore
     if (decoded) {
         //@ts-ignore

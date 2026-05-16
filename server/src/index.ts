@@ -5,11 +5,13 @@ import express from "express";
 import { ContentModel, LinkModel, UserModel } from "./db.js";
 import bcrypt from "bcrypt";
 import { userMiddleware } from "./middleware.js";
+import cors from "cors";
 
 const JWT_PASSWORD = "Siddharth1801";
 
 const app = express();
 app.use(express.json());  // it will make body to be in json format
+app.use(cors());
 
 app.post("/api/v1/signup", async (req,res) => {
     const email =  req.body.email;
@@ -30,7 +32,7 @@ app.post("/api/v1/signup", async (req,res) => {
         message: "Signup successful"
     })
 } catch(e){
-    res.status(411).json({
+    res.status(409).json({
         message: "user already exists"
     })
     
@@ -53,7 +55,7 @@ app.post("/api/v1/signin", (req,res)=>{
         })
     }
     else{
-        res.status(411).json({
+        res.status(409).json({
             message: "invalid credentials"
         })
     }
@@ -152,7 +154,7 @@ app.post("api/v1/brain/:shareLink", async(req,res) => {
     });
 
     if(!link){
-        res.status(411).json({
+        res.status(409).json({
             message: "Sorry incorrect input"
         })
         return;
@@ -168,7 +170,7 @@ app.post("api/v1/brain/:shareLink", async(req,res) => {
     })
 
     if(!user){
-        res.status(411).json({
+        res.status(409).json({
             message: "user not found"
         })
         return;

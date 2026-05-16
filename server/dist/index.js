@@ -5,9 +5,11 @@ import express from "express";
 import { ContentModel, LinkModel, UserModel } from "./db.js";
 import bcrypt from "bcrypt";
 import { userMiddleware } from "./middleware.js";
+import cors from "cors";
 const JWT_PASSWORD = "Siddharth1801";
 const app = express();
 app.use(express.json()); // it will make body to be in json format
+app.use(cors());
 app.post("/api/v1/signup", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -25,7 +27,7 @@ app.post("/api/v1/signup", async (req, res) => {
         });
     }
     catch (e) {
-        res.status(411).json({
+        res.status(409).json({
             message: "user already exists"
         });
     }
@@ -45,7 +47,7 @@ app.post("/api/v1/signin", (req, res) => {
         });
     }
     else {
-        res.status(411).json({
+        res.status(409).json({
             message: "invalid credentials"
         });
     }
@@ -58,9 +60,9 @@ app.post("/api/v1/signin", (req, res) => {
 });
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
     //@ts-ignore
-    // const link;
+    let link;
     //@ts-ignore
-    // const type;
+    let type;
     await ContentModel.create({
         link,
         //@ts-ignore
@@ -124,7 +126,7 @@ app.post("api/v1/brain/:shareLink", async (req, res) => {
         hash
     });
     if (!link) {
-        res.status(411).json({
+        res.status(409).json({
             message: "Sorry incorrect input"
         });
         return;
@@ -137,7 +139,7 @@ app.post("api/v1/brain/:shareLink", async (req, res) => {
         _id: link.userId
     });
     if (!user) {
-        res.status(411).json({
+        res.status(409).json({
             message: "user not found"
         });
         return;

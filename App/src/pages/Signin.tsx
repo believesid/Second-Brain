@@ -12,6 +12,9 @@ export function Signin(){
         <div className="justify-center items-center flex pt-2">
             <Button variant="primary" text= "Signin" fullWidth={true} loading={false}/>
         </div>
+        <div className="text-center mt-2">
+            <p className="text-sm">Not registered? <a href="/signup" className="text-purple-600">Sign Up</a></p>
+        </div>
         </div>
        
     </div>
