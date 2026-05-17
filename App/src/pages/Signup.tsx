@@ -7,25 +7,25 @@ import { BACKEND_URL } from "../config";
 
 
 export function Signup(){
-     const emailRef = useRef<HTMLInputElement>(null); 
+     const usernameRef = useRef<HTMLInputElement>(null); 
      const passwordRef = useRef<HTMLInputElement>(null);
 
 
      async function signup(){
-          const email = emailRef.current?.value;
+          const username = usernameRef.current?.value;
           const password = passwordRef.current?.value;
           await axios.post(BACKEND_URL + "/api/v1/signup" , {
-            email,
+            username,
             password,
         
           })
 
-        alert("Signed up successfully");
+        alert("Signed up successfully")
      }
     
     return <div className="h-screen w-screen bg-gray-200 flex  justify-center items-center">
         <div className="bg-white rounded-xl border min-w-48 p-8 ">
-            <Input reference={emailRef} placeholder="Email"/>
+            <Input reference={usernameRef} placeholder="username"/>
             <Input reference={passwordRef} placeholder="Password"/>
 
         <div className="justify-center items-center flex pt-2 cursor-pointer">

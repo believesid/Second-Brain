@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+export declare const connectDB: () => Promise<void>;
 export declare const UserModel: mongoose.Model<{
     username?: string | null;
     password?: string | null;

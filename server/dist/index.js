@@ -6,12 +6,14 @@ import { ContentModel, LinkModel, UserModel } from "./db.js";
 import bcrypt from "bcrypt";
 import { userMiddleware } from "./middleware.js";
 import cors from "cors";
+import { connectDB } from "./db.js";
 const JWT_PASSWORD = "Siddharth1801";
+connectDB();
 const app = express();
 app.use(express.json()); // it will make body to be in json format
 app.use(cors());
 app.post("/api/v1/signup", async (req, res) => {
-    const email = req.body.email;
+    const username = req.body.username;
     const password = req.body.password;
     //zod validation, hash the password
     //const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
@@ -19,12 +21,14 @@ app.post("/api/v1/signup", async (req, res) => {
     try {
         await UserModel.create({
             //@ts-ignore
-            email: email,
-            hashedPassword: hashedPassword
+            username: username,
+            //@ts-ignore
+            password: hashedPassword
         });
         res.json({
             message: "Signup successful"
         });
+        console.log(username);
     }
     catch (e) {
         res.status(409).json({
@@ -33,10 +37,10 @@ app.post("/api/v1/signup", async (req, res) => {
     }
 });
 app.post("/api/v1/signin", (req, res) => {
-    const email = req.body.email;
+    const username = req.body.username;
     const password = req.body.password;
     const existingUser = UserModel.findOne({
-        email,
+        username,
         password
     });
     if (existingUser) {
@@ -51,7 +55,7 @@ app.post("/api/v1/signin", (req, res) => {
             message: "invalid credentials"
         });
     }
-    // const token = jwt.sign("email")
+    // const token = jwt.sign("username")
     // const validUser = () => {
     //     password == UserModel.hashedPassword;
     // }

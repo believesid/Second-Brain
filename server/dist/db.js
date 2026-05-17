@@ -1,5 +1,15 @@
 import mongoose, { model, Model, Schema } from "mongoose";
-mongoose.connect("mongodb://nayaksiddharth1801_db_user:JdzDfp14StUy4uQL@ac-0jhgsnv-shard-00-00.1xp0gfh.mongodb.net:27017,ac-0jhgsnv-shard-00-01.1xp0gfh.mongodb.net:27017,ac-0jhgsnv-shard-00-02.1xp0gfh.mongodb.net:27017/?ssl=true&replicaSet=atlas-5zpoqt-shard-0&authSource=admin&appName=Cluster0");
+export const connectDB = async () => {
+    try {
+        //@ts-ignore
+        await mongoose.connect("mongodb://sid-18:nayak12@ac-mbosyxh-shard-00-00.hkk9bh6.mongodb.net:27017,ac-mbosyxh-shard-00-01.hkk9bh6.mongodb.net:27017,ac-mbosyxh-shard-00-02.hkk9bh6.mongodb.net:27017/Second-Brain?ssl=true&replicaSet=atlas-ulperk-shard-0&authSource=admin&appName=Cluster0");
+        console.log("database connected");
+    }
+    catch (error) {
+        console.error("MongoDB connection error:", error);
+        process.exit(1);
+    }
+};
 //first create a schema then use a model to put it, "users" is the name of the UserModel (this statement covers code till line 10)
 const UserSchema = new Schema({
     username: { type: String, unique: true },
