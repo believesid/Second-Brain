@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { random } from "./utils.js";
 import express from "express";
@@ -7,22 +6,20 @@ import bcrypt from "bcrypt";
 import { userMiddleware } from "./middleware.js";
 import cors from "cors";
 import { connectDB } from "./db.js";
+import dotenv from "dotenv";
+dotenv.config();
 const JWT_PASSWORD = "Siddharth1801";
 connectDB();
 const app = express();
-app.use(express.json()); // it will make body to be in json format
+app.use(express.json());
 app.use(cors());
 app.post("/api/v1/signup", async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    //zod validation, hash the password
-    //const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
     const hashedPassword = bcrypt.hashSync(password, 10);
     try {
         await UserModel.create({
-            //@ts-ignore
             username: username,
-            //@ts-ignore
             password: hashedPassword
         });
         res.json({
@@ -36,41 +33,33 @@ app.post("/api/v1/signup", async (req, res) => {
         });
     }
 });
-app.post("/api/v1/signin", (req, res) => {
+app.post("/api/v1/signin", async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const existingUser = UserModel.findOne({
-        username,
-        password
-    });
-    if (existingUser) {
-        //@ts-ignore
+    // ✅ Fix 1: added await
+    const existingUser = await UserModel.findOne({ username });
+    // ✅ Fix 2: using bcrypt to compare hashed password
+    //@ts-ignore
+    if (existingUser && bcrypt.compareSync(password, existingUser.password)) {
         const token = jwt.sign({ id: existingUser._id }, JWT_PASSWORD);
-        res.json({
-            token
-        });
+        res.json({ token });
     }
     else {
-        res.status(409).json({
+        res.status(403).json({
             message: "invalid credentials"
         });
     }
-    // const token = jwt.sign("username")
-    // const validUser = () => {
-    //     password == UserModel.hashedPassword;
-    // }
-    // if(password == UserModel.hashedPassword){
-    // }
 });
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
-    //@ts-ignore
-    let link;
-    //@ts-ignore
-    let type;
+    // ✅ Fix 3: correct assignment syntax
+    const link = req.body.link;
+    const type = req.body.type;
+    const title = req.body.title; // ✅ Fix 4: added title
     await ContentModel.create({
         link,
         //@ts-ignore
         type,
+        title,
         //@ts-ignore
         userId: req.userId,
         tags: []
@@ -110,9 +99,7 @@ app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
             userId: req.userId,
             hash: hash
         });
-        res.json({
-            hash
-        });
+        res.json({ hash });
     }
     else {
         await LinkModel.deleteOne({
@@ -124,11 +111,10 @@ app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
         });
     }
 });
-app.post("api/v1/brain/:shareLink", async (req, res) => {
+// ✅ Fix 5: added missing leading slash
+app.post("/api/v1/brain/:shareLink", async (req, res) => {
     const hash = req.params.shareLink;
-    const link = await LinkModel.findOne({
-        hash
-    });
+    const link = await LinkModel.findOne({ hash });
     if (!link) {
         res.status(409).json({
             message: "Sorry incorrect input"

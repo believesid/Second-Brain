@@ -1,9 +1,12 @@
 import mongoose, { model, Model, Schema } from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 export const connectDB = async () => {
     try {
         //@ts-ignore
-        await mongoose.connect("mongodb://sid-18:nayak12@ac-mbosyxh-shard-00-00.hkk9bh6.mongodb.net:27017,ac-mbosyxh-shard-00-01.hkk9bh6.mongodb.net:27017,ac-mbosyxh-shard-00-02.hkk9bh6.mongodb.net:27017/Second-Brain?ssl=true&replicaSet=atlas-ulperk-shard-0&authSource=admin&appName=Cluster0");
-        console.log("database connected");
+        console.log("hero");
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("Database connected");
     }
     catch (error) {
         console.error("MongoDB connection error:", error);
@@ -15,7 +18,7 @@ const UserSchema = new Schema({
     username: { type: String, unique: true },
     password: { type: String }
 });
-export const UserModel = model("users", UserSchema);
+export const UserModel = model("User", UserSchema);
 const ContentSchema = new Schema({
     title: String,
     link: String,

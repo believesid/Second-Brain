@@ -1,2 +1,2 @@
-export declare const JWT_PASSWORD = "123123";
+export declare const JWT_PASSWORD = "Siddharth1801";
 //# sourceMappingURL=config.d.ts.map

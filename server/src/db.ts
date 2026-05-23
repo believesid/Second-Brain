@@ -1,10 +1,12 @@
 import mongoose , {model, Model, Schema} from "mongoose";
-
+import dotenv from "dotenv";
+dotenv.config();
 
 export const connectDB = async () => {
   try {
     //@ts-ignore
-    await mongoose.connect(process.env.MONGO_URI as string)
+    console.log("hero");
+    await mongoose.connect(process.env.MONGO_URI as string);
     console.log("Database connected");
   } catch (error) {
     console.error("MongoDB connection error:", error);
@@ -17,7 +19,7 @@ const UserSchema = new Schema({
     password: {type: String}
 })
 
-export const UserModel = model("users", UserSchema);
+export const UserModel = model("User", UserSchema);
 
 const ContentSchema = new Schema({
     title: String,

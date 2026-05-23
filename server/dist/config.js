@@ -1,2 +1,2 @@
-export const JWT_PASSWORD = "123123";
+export const JWT_PASSWORD = "Siddharth1801";
 //# sourceMappingURL=config.js.map
