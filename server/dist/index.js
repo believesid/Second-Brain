@@ -78,7 +78,15 @@ app.get("/api/v1/content", userMiddleware, async (req, res) => {
         content
     });
 });
-app.delete("/api/v1/content", (req, res) => {
+app.delete("/api/v1/content", userMiddleware, async (req, res) => {
+    // pass the content id and the onDelete callback as prop.
+    const contentId = req.body.contentId;
+    await ContentModel.deleteOne({
+        _id: contentId,
+        //@ts-ignore
+        userId: req.userId //only delete if it belongs to this user
+    });
+    res.json({ message: "Content deleted" });
 });
 app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
     const share = req.body.share;

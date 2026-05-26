@@ -1,13 +1,28 @@
+import { BACKEND_URL } from "../config";
+import { DeleteIcon } from "../icons/DeleteIcon";
 import { ShareIcon } from "../icons/ShareIcon";
+import axios from "axios";
+
 
 interface CardProps {
     title: string; // Title of the card, e.g., video or tweet title
     link: string; // Link to the content (YouTube or Twitter)
     type: "twitter" | "youtube"; // Type of the content
+    contentId: string;
+    onDelete: () => void;
 }
 
 // The Card component represents a styled card that can display either a YouTube video or a Twitter embed based on the type prop.
-export function Card({ title, link, type }: CardProps) {
+export function Card({ title, link, type, contentId, onDelete }: CardProps) {
+    async function deleteContent(){
+        await axios.delete(BACKEND_URL + "/api/v1/content", {
+            data: {contentId}, // Delete requests send body under "data" in axios
+            headers: {
+                "Authorization": localStorage.getItem("token") || ""
+            }
+        });
+        onDelete();  // Refresh dashboard after deletion
+    }
     return (
         <div>
             {/* Card Container */}
@@ -30,9 +45,8 @@ export function Card({ title, link, type }: CardProps) {
                                 <ShareIcon />
                             </a>
                         </div>
-                        <div className="text-gray-500">
-                            {/* Placeholder for another Share Icon */}
-                            <ShareIcon />
+                        <div className="text-gray-500 cursor-pointer" onClick={deleteContent}>
+                          <DeleteIcon />
                         </div>
                     </div>
                 </div>
@@ -44,8 +58,8 @@ export function Card({ title, link, type }: CardProps) {
                         <iframe
                             className="w-full"
                             src={link
-                                .replace("watch", "embed")
-                                .replace("?v=", "/")}
+                                .replace("watch?v=", "embed/")}
+                                
                             title="YouTube video player"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

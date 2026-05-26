@@ -119,6 +119,7 @@ export declare const LinkModel: mongoose.Model<{
     __v: number;
 }>;
 export declare const ContentModel: mongoose.Model<{
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     userId: mongoose.Types.ObjectId;
     link?: string | null;
@@ -126,6 +127,7 @@ export declare const ContentModel: mongoose.Model<{
 }, {}, {}, {
     id: string;
 }, mongoose.Document<unknown, {}, {
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     userId: mongoose.Types.ObjectId;
     link?: string | null;
@@ -133,6 +135,7 @@ export declare const ContentModel: mongoose.Model<{
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     userId: mongoose.Types.ObjectId;
     link?: string | null;
@@ -144,11 +147,13 @@ export declare const ContentModel: mongoose.Model<{
 }, "id"> & {
     id: string;
 }, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     userId: mongoose.Types.ObjectId;
     link?: string | null;
     title?: string | null;
 }, mongoose.Document<unknown, {}, {
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     userId: mongoose.Types.ObjectId;
     link?: string | null;
@@ -156,6 +161,7 @@ export declare const ContentModel: mongoose.Model<{
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     userId: mongoose.Types.ObjectId;
     link?: string | null;
@@ -167,6 +173,7 @@ export declare const ContentModel: mongoose.Model<{
 }, "id"> & {
     id: string;
 }, unknown, {
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     userId: mongoose.Types.ObjectId;
     link?: string | null;
@@ -176,6 +183,7 @@ export declare const ContentModel: mongoose.Model<{
 } & {
     __v: number;
 }>, {
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     userId: mongoose.Types.ObjectId;
     link?: string | null;

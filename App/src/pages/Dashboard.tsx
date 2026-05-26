@@ -62,6 +62,8 @@ export function Dashboard() {
                         type={content.type}
                         link={content.link}
                         title={content.title}
+                        contentId={content._id}  //pass id
+                        onDelete={fetchContent}  // Refetch after delete
                     />
                 ))}
             </div>

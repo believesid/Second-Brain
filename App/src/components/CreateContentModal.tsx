@@ -25,12 +25,29 @@ export function CreateContentModal({ open, onClose }: CreateContentModalProps) {
     const linkRef = useRef<HTMLInputElement>(null);
     // State to manage the selected content type
     const [type, setType] = useState(ContentType.Youtube);
+    const [titleError, setTitleError] = useState("");
+    const [linkError, setLinkError] = useState("");
 
     // Function to handle adding new content
     async function addContent() {
         console.log("content added");
+        
         const title = titleRef.current?.value; // Getting the title value from the input
         const link = linkRef.current?.value; // Getting the link value from the input
+
+        if(!title){
+            setTitleError("Please enter the title");
+            return;
+        }
+        setTitleError(""); // clear error if valid
+
+        if(!link){
+            setLinkError("Please put a valid link");
+            return;
+        }
+        setLinkError(""); // clear error if valid
+
+       
 
         // Making a POST request to add new content
         await axios.post(BACKEND_URL + "/api/v1/content" , {
@@ -61,9 +78,14 @@ export function CreateContentModal({ open, onClose }: CreateContentModalProps) {
                         <CrossIcon />
                     </div>
                 </div>
+                
                 <div className="flex flex-col">
                     <input ref={titleRef} type="text" placeholder="Title" />
-                    <input ref={linkRef} className="mt-4 w-40" type="text" placeholder="Link" />
+                    {titleError && <p className="text-red-500 text-sm mt-1">{titleError}</p>}
+                    <input  ref={linkRef} className="mt-4 w-40" type="text" placeholder="Link" />
+                    {linkError && <p className="text-red-500 text-sm mt-1">{linkError}</p> }
+                   
+                    {/* <iframe  src={linkRef} frameborder="0"></iframe> */}
                 </div>
 
                 <div>
