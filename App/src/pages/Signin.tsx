@@ -4,6 +4,7 @@ import { Input } from "../components/Input"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { Logo } from "../icons/Logo";
 
 
 export function Signin(){
@@ -27,8 +28,12 @@ export function Signin(){
         navigate("/dashboard");
      }
     
-    return <div className="h-screen w-screen bg-gray-200 flex  justify-center items-center">
+    return <div className="bg-white-100 mt-4 ml-6 mr-4 fixed " >
+        {<Logo/>}
+        <div className="h-screen w-screen  flex  justify-center items-center">
+            
         <div className="bg-white rounded-xl border min-w-48 p-8 ">
+            <h2 className="flex font-medium text-2xl text-center justify-center mb-3">Log in</h2>
             <Input reference={usernameRef}  placeholder="username"/>
             <Input reference={passwordRef} placeholder="Password"/>
 
@@ -36,10 +41,11 @@ export function Signin(){
             <Button onClick={signin} variant="primary" text= "Signin" fullWidth={true} loading={false}/>
         </div>
         <div className="text-center mt-2">
-            <p className="text-sm">Not registered? <a href="/signup" className="text-purple-600">Sign Up</a></p>
+            <p className="text-sm">Not registered? <a href="/signup" className="text-blue-700">Sign Up</a></p>
         </div>
         </div>
        
+    </div>
     </div>
 
 }

@@ -1,7 +1,9 @@
 
 const variantClasses = {
-    "primary": "bg-purple-600 text-white",
-    "secondary": "bg-purple-400 text-white"
+    "primary": "bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors cursor-pointer border-none",
+        
+    "secondary": "bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors cursor-pointer border-none"
+        
 }
 
 

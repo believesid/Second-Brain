@@ -8,8 +8,8 @@ interface CardProps {
     title: string; // Title of the card, e.g., video or tweet title
     link: string; // Link to the content (YouTube or Twitter)
     type: "twitter" | "youtube"; // Type of the content
-    contentId: string;
-    onDelete: () => void;
+    contentId: string;  //contentId is the MongoDB _id for any specific card
+    onDelete: () => void; // onDelete is a function that takes no arguments and also returns nothing (that is it returns void);
 }
 
 // The Card component represents a styled card that can display either a YouTube video or a Twitter embed based on the type prop.

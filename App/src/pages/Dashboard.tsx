@@ -14,7 +14,7 @@ export function Dashboard() {
     const [modalOpen, setModalOpen] = useState(false);
     const [contents, setContents] = useState([]);
 
-    // ✅ Fetch content from backend
+    //  Fetch content from backend
     async function fetchContent() {
         const response = await axios.get(BACKEND_URL + "/api/v1/content", {
             headers: {
@@ -24,7 +24,7 @@ export function Dashboard() {
         setContents(response.data.content);
     }
 
-    // ✅ Fetch on page load
+    //  Fetch on page load
     useEffect(() => {
         fetchContent();
     }, []);
@@ -37,7 +37,7 @@ export function Dashboard() {
         <div className='p-4 ml-72 h-screen bg-gray-100'>
             <CreateContentModal open={modalOpen} onClose={() => {
                 setModalOpen(false);
-                fetchContent(); // ✅ Refetch after adding content
+                fetchContent(); //  Refetch after adding content
             }} />
 
             <div className='flex justify-end gap-2 pointer'>
@@ -54,7 +54,7 @@ export function Dashboard() {
                 />
             </div>
 
-            {/* ✅ Render cards dynamically from backend */}
+            {/*  Render cards dynamically from backend */}
             <div className='flex gap-4 flex-wrap'>
                 {contents.map((content: any) => (
                     <Card
