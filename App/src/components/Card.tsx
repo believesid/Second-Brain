@@ -2,6 +2,7 @@ import { BACKEND_URL } from "../config";
 import { DeleteIcon } from "../icons/DeleteIcon";
 import { ShareIcon } from "../icons/ShareIcon";
 import axios from "axios";
+import { useEffect } from "react";
 
 
 interface CardProps {
@@ -14,6 +15,12 @@ interface CardProps {
 
 // The Card component represents a styled card that can display either a YouTube video or a Twitter embed based on the type prop.
 export function Card({ title, link, type, contentId, onDelete }: CardProps) {
+    useEffect(() => {
+        if (type === "twitter" && window.twttr?.widgets) {
+            window.twttr.widgets.load();
+        }
+    }, [type, link]);
+
     async function deleteContent(){
         await axios.delete(BACKEND_URL + "/api/v1/content", {
             data: {contentId}, // Delete requests send body under "data" in axios

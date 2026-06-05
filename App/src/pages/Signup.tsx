@@ -30,10 +30,12 @@ export function Signup(){
         {<Logo/>}
         <div className=" flex h-screen justify-center items-center -mt-20">
       
-          <div className= " bg-white border-gray-300 rounded-xl border min-w-48 p-8 ">
+          <div className= " bg-white border-gray-300 rounded-xl border min-w-48 p-8  ">
             <h2 className="flex font-medium text-2xl text-center justify-center mb-3">Get started</h2>
-            <Input reference={usernameRef} placeholder="username"/>
-            <Input reference={passwordRef} placeholder="Password"/>
+            <div className="flex-1 border-neutral-500 focus:ring-2 focus:ring-sky-300 focus:outline-none">
+                <Input reference={usernameRef} placeholder="username"/>
+                <Input reference={passwordRef} placeholder="Password"/>
+            </div>
 
         <div className="justify-center items-center flex pt-2 cursor-pointer">
              <Button onClick={signup} variant="primary" text= "Signup" fullWidth={true} loading={false}/>

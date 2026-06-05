@@ -32,7 +32,7 @@ export function Signin(){
         {<Logo/>}
         <div className="h-screen w-screen  flex  justify-center items-center">
             
-        <div className="bg-white rounded-xl border min-w-48 p-8 ">
+        <div className="bg-white border-gray-300 rounded-xl border min-w-48 p-8 -mt-25">
             <h2 className="flex font-medium text-2xl text-center justify-center mb-3">Log in</h2>
             <Input reference={usernameRef}  placeholder="username"/>
             <Input reference={passwordRef} placeholder="Password"/>

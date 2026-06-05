@@ -10,11 +10,12 @@ export function Sidebar(){
       <div className="">
         <div className="flex gap-2">
          
-    <div className="text-purple-300  mt-4 ml-6 mr-4 fixed">
+    <div className=" flex mt-4 ml-6 mr-4 fixed mb-6">
           {<Logo/>}
     </div>
+    <br /><br /> <br /> 
     <div className="text-size-xl">
-       <h1></h1>
+       
     </div>
         </div>
          <div className="flex">

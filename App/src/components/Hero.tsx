@@ -2,8 +2,9 @@
 export function Hero(){
     return <div>
         <div className="px-4 py-2 flex items-center flex-col w-full my-20">
-            <button className="border px-4 py-1 rounded-full  border-gray-300
-            hover:bg-gray-200 transition cursor-pointer duration-200 bg-slate-100 text-gray600 -mt-45">
+            <button className="absolute border px-4 py-1 rounded-full  border-gray-300
+            hover:bg-gray-200 transition cursor-pointer duration-200  text-gray600 -mt-45 bg-linear-to-r from-transparent
+            via-sky-300 to-transparent  ">
                 Store all your brain content here
                
             </button>

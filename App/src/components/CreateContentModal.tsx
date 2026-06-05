@@ -4,6 +4,7 @@ import { Button } from "./Button";
 // import { Card } from "./Card";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
+// import { Input } from "./Input";
 
 // Enum to represent different types of content
 //@ts-ignore
@@ -79,17 +80,24 @@ export function CreateContentModal({ open, onClose }: CreateContentModalProps) {
                     </div>
                 </div>
                 
-                <div className="flex flex-col">
-                    <input ref={titleRef} type="text" placeholder="Title" />
-                    {titleError && <p className="text-red-500 text-sm mt-1">{titleError}</p>}
-                    <input  ref={linkRef} className="mt-4 w-40" type="text" placeholder="Link" />
-                    {linkError && <p className="text-red-500 text-sm mt-1">{linkError}</p> }
+               <br />
+                <div className="flex flex-col px-4 ">
+                    <input ref={titleRef} type="text" placeholder="Title" className="flex border border-gray-500 focus:ring-1 focus:ring-sky-300 focus:outline-none transition duration-200" />
                    
+                    <div>
+                         {titleError && <p className="text-red-500 text-sm mt-1">{titleError}</p>}
+                    <input  ref={linkRef} className="mt-4 w-40 border border-gray-500 focus:ring-1 focus:ring-sky-300 focus:outline-none transition duration-200"
+                    type="text" placeholder="Link" />
+                    {linkError && <p className="text-red-500 text-sm mt-1">{linkError}</p> } 
+                   
+                    </div>
                     {/* <iframe  src={linkRef} frameborder="0"></iframe> */}
                 </div>
-
-                <div>
+                 
+                 <br />
+                <div className=" justify-center text-center text-bold text-2xl">
                     <h1>Type</h1>
+                    <br />
                     <div className="flex gap-1 justify-center pb-2">
                         <Button
                             text="Youtube"
