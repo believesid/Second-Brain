@@ -1,10 +1,14 @@
 import { TweetIcon } from "../icons/TweetIcon";
 import { YoutubeIcon } from "../icons/YoutubeIcon";
+import { HomeIcon } from "../icons/HomeIcon";
 import { SidebarItem } from "./SidebarItem";
 import { Logo } from "../icons/Logo";
 
-export function Sidebar(){
-   return <div className="h-screen bg-white border-r w-72 fixed left-0 top-0">
+export function Sidebar({onTypeSelect}: {onTypeSelect: (type: string | null) => void}){
+  
+  
+   return ( 
+   <div className="h-screen bg-white border-r w-72 fixed left-0 top-0">
     
 
       <div className="">
@@ -19,10 +23,14 @@ export function Sidebar(){
     </div>
         </div>
          <div className="flex">
-          <SidebarItem text = "Twitter" icon = {<TweetIcon/>}/>
+          <SidebarItem text = "Home" icon = {<HomeIcon/>} onClick={() => onTypeSelect(null)}/>
          </div>
-  
-        <SidebarItem text = "Youtube" icon = {<YoutubeIcon/>}/>
+         <div className="flex">
+          <SidebarItem text = "Twitter" icon = {<TweetIcon/>} onClick={() => onTypeSelect('twitter')}/>
+         </div>
+
+        <SidebarItem text = "Youtube" icon = {<YoutubeIcon/>} onClick={() => onTypeSelect('youtube')}/>
       </div>
   </div>
-}
+   )
+  }

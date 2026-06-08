@@ -4,7 +4,12 @@ import { Signin } from "./pages/Signin";
 import { Signup } from "./pages/Signup";
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 
+
 function App(){
+  // Parent (App.tsx)
+
+
+
   return(
    <BrowserRouter>
     <Routes>

@@ -13,6 +13,10 @@ import { BACKEND_URL } from '../config'
 export function Dashboard() {
     const [modalOpen, setModalOpen] = useState(false);
     const [contents, setContents] = useState([]);
+    const [activeType, setActiveType] = useState(null);
+
+    // Filter contents
+    const filteredContents = activeType ? contents.filter(e => e.type === activeType) : contents;
 
     //  Fetch content from backend
     async function fetchContent() {
@@ -31,7 +35,7 @@ export function Dashboard() {
 
     return <div>
         <div>
-            <Sidebar />
+            <Sidebar onTypeSelect={setActiveType} />
             <DocIcon />
         </div>
         <div className='p-4 ml-72 h-screen bg-gray-100'>
@@ -56,7 +60,7 @@ export function Dashboard() {
 
             {/*  Render cards dynamically from backend */}
             <div className='flex gap-4 flex-wrap'>
-                {contents.map((content: any) => (
+                {filteredContents.map((content: any) => (
                     <Card
                         key={content._id}
                         type={content.type}

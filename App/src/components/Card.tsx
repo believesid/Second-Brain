@@ -16,6 +16,7 @@ interface CardProps {
 // The Card component represents a styled card that can display either a YouTube video or a Twitter embed based on the type prop.
 export function Card({ title, link, type, contentId, onDelete }: CardProps) {
     useEffect(() => {
+        //@ts-ignore
         if (type === "twitter" && window.twttr?.widgets) {
             window.twttr.widgets.load();
         }
